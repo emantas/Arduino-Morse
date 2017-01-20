@@ -1,0 +1,10 @@
+To replicate this project:
+You need x2 Arduino boards,1 jumper cable,1 led (optional)
+
+Instructions:
+Upload the server code to one arduino board
+And the client code to the other
+
+Connect the cable to pin 11 of the server board
+to the pin 11 of the client board
+(optional step: connect a led to pin 13)

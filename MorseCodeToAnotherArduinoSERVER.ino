@@ -1,0 +1,80 @@
+int mess=11; // send 1/0 to port 11
+String incomingByte = " "; // message to write in COM
+
+//array of morse chars
+//NOTE alpha[0]= .-
+//     alpha[0][0]= .    alpha[0][1]= -
+static const String alpha[] = {
+    ".-",   //A
+    "-...", //B
+    "-.-.", //C
+    "-..",  //D
+    ".",    //E
+    "..-.", //F
+    "--.",  //G
+    "....", //H
+    "..",   //I
+    ".---", //J
+    "-.-",  //K
+    ".-..", //L
+    "--",   //M
+    "-.",   //N
+    "---",  //O
+    ".--.", //P
+    "--.-", //Q
+    ".-.",  //R
+    "...",  //S
+    "-",    //T
+    "..-",  //U
+    "...-", //V
+    ".--",  //W
+    "-..-", //X
+    "-.--", //Y
+    "--..", //Z
+};
+void setup() {
+  
+  pinMode(mess,OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+
+        // send data only when you receive data:
+        if (Serial.available() > 0) {
+                // read the incoming byte:
+                incomingByte = Serial.read();
+
+                // say what you got:
+                Serial.print("I received: ");
+                Serial.println(incomingByte);
+        }
+    //char 97 is a - 122 is z , so this prints the char in morse
+    if (incomingByte.toInt()>=97 && incomingByte.toInt()<=122){
+      int index=incomingByte.toInt()-97;
+      Serial.println(alpha[index]);
+      
+      incomingByte=" "; // prepare for the next character
+      
+      for(int i=0; i< strlen(alpha[index].c_str());i++){
+        Serial.println("test");
+        //if the first char is . make the led blink else like a _
+         if(alpha[index][i]=='.'){
+              digitalWrite(11,HIGH);
+              delay(500);            
+              digitalWrite(11,LOW);
+              delay(500);
+          }else{
+              digitalWrite(11,HIGH);
+              delay(1000);            
+              digitalWrite(11,LOW);
+              delay(1000);
+            
+          }
+        
+      }
+     
+     
+   }
+  
+}
